@@ -6,7 +6,9 @@ public class Entrada {
         Operaciones operaciones = new Operaciones();
         //operaciones.informacionFichero("src/resources/ejemplo1.txt");
         //operaciones.informacionDirectorio("src/resources");
+        //operaciones.mostrarFicherosRecurrentes(new File("C:\\Users\\Eva\\OneDrive\\DAM\\2ºDAM\\06 Acceso a datos\\AccesoADatos\\Tema 1. Ficheros\\FicherosInformacion"));
         //operaciones.escribirFichero("src/resources/escritura.txt");
-        operaciones.mostrarFicherosRecurrentes(new File("C:\\Users\\Eva\\OneDrive\\DAM\\2ºDAM\\06 Acceso a datos\\AccesoADatos\\Tema 1. Ficheros\\FicherosInformacion"));
+        //operaciones.escrituraSuperior("src/resources/escritura_superior.txt");
+        operaciones.exportarUsuario("src/resources/usuarios.csv");
     }
 }

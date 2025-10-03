@@ -1,6 +1,7 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import model.Usuario;
+
+import java.io.*;
+import java.util.ArrayList;
 
 public class Operaciones {
 
@@ -67,10 +68,10 @@ public class Operaciones {
 
 
 
-    //METODO VOID PARA ESCRIBIR EN UN FICHERO
+    //METODO VOID PARA ESCRIBIR EN UN FICHERO CON FILEWRITER
     public void escribirFichero(String path){
-        File file = new File(path); //1. instanciamos el file. Si no existe, lo creamos, si existe, sale.
-        if (!file.exists()){
+        File file = new File(path);                                 //1. instanciamos el objeto de File.
+        if (!file.exists()){                                        //2. Si no existe, lo creamos, si existe, sale.
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -79,18 +80,71 @@ public class Operaciones {
         }else{
             System.out.println("El fichero ya existe");
         }
-        FileWriter fileWriter = null; //2. Instanciamos un objeto de FileWriter y lo igualamos a null para darle un objeto separado y que salte la excepción. Necesitamos la excepción para añadir el "finally" que solo puede ir tras un try o catch
+        FileWriter fileWriter = null;           //3. Instanciamos un objeto de FileWriter y lo igualamos a null para declararlo un objeto separado dentro de un trycatch. El motivo es que es necesario cerrar el flujo con un "finally", y si el objeto queda dentro del trycath, no podría acceder a él
         try {
-            fileWriter = new FileWriter(file); //3. aquí terminamos de instanciar el objeto
-            fileWriter.write("esto es una prueba de escritura"); //6. ahora escribimos lo que queramos
+            fileWriter = new FileWriter(file);  //4. aquí terminamos de instanciar el objeto
+            fileWriter.write(122); //7. ahora escribimos lo que queramos
         } catch (IOException e) {
             System.out.println("no puedes realizar la escritura para el fichero de clase");
-        } finally {  //4. el finally necesario para cerrar el flujo
+        } finally {                             //5. el finally necesario para cerrar el flujo
             try {
-                fileWriter.close();  //5. necesario cerrar el flujo, también nos salta una excepción para este
+                fileWriter.close();             //6. necesario cerrar el flujo, también nos salta una excepción para este
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+    //METODO ESCRITURA USANDO EL PRINTWRITER/BUFFEREDREADER
+    public void escrituraSuperior(String path){
+        File file = new File(path);             //1. instanciamos el File
+        FileWriter fileWriter = null;           //2. instanciamos el FileWriter (igualado a null para que no se meta en la excepción)
+        PrintWriter printWriter = null;         //3. instanciamos el PrintWriter (igualado a null para que no se meta en la excepción y podamos cerrar el flujo)
+        //BufferedWriter bufferedWriter = null;   //4. instanciamos el BufferedWriter. Funciona igual qu eel PrintWriter, solo que es un poco menos eficiente, así que está aqui de ejemplo pero no lo vamos a usar
+
+        try {
+            fileWriter = new FileWriter (file); //5. dentro del trycatch, declaramos el file y el printwriter. Esto se podría hacer en una sola línea-> printWriter = new PrintWriter (fileWriter = new FileWriter (file));
+            printWriter = new PrintWriter (fileWriter);
+            printWriter.println("Esto es un ejemplo con printWriter");  //7. ahora podemos escribir con saltos de línea, println
+            printWriter.println("Esto es una nueva línea");
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {                              //6. hay que cerrar el flujo abierto. No nos obliga a capturar la excepción, pero es aconsejable porque puede dar error, así que capturamos la excepción de forma manual
+            try {
+                printWriter.close();
+            } catch (NullPointerException e){
+                System.out.println("error en el cerrado");
+            }
+        }
+    }
+
+    //METODO DE ESCRITURA PRINTWRITER PARA EXPORTAR USUARIOS DE UNA CLASE
+                                                                        //hemos creado la Clase Usuario con sus variables privadas y el metodo toString modificado (ver metodo)
+    public void exportarUsuario(String path){
+        ArrayList<Usuario> listaUsuario = new ArrayList<>();            //1.creamos  un ArrayList de nombre listaUsuario y añadimos usuarios
+        listaUsuario.add(new Usuario(1, "Eva", "López", "7894A", "eva@gmail.com"));
+        listaUsuario.add(new Usuario(2, "Eva2", "López", "7894B", "eva@gmail.com"));
+        listaUsuario.add(new Usuario(3, "Eva3", "López", "7894C", "eva@gmail.com"));
+        listaUsuario.add(new Usuario(4, "Eva4", "López", "7894D", "eva@gmail.com"));
+        listaUsuario.add(new Usuario(5, "Eva5", "López", "7894E", "eva@gmail.com"));
+        listaUsuario.add(new Usuario(6, "Eva6", "López", "7894F", "eva@gmail.com"));
+
+        File file = new File(path);                                     //3. instanciamos file, printWriter (a null) y printWriter (a null)
+        PrintWriter printWriter = null;
+        FileWriter fileWriter = null;
+
+        try {
+            fileWriter = new FileWriter(file);                          //4. inicializamos fileWriter y printWriter
+            printWriter = new PrintWriter(fileWriter);
+            printWriter.println("id, nombre, apellido, dni, correo");   //6. imprimimos la primera fila y recorremos la lista de usuarios con el for
+            for (Usuario usuario: listaUsuario){                        //2. for each para recorrer el array Lista de usuario con cada usuario de tipo Usuario (esto es solo para ver en consola
+                printWriter.println(usuario);
+            }
+        } catch (IOException e) {                                        //5. capturamos las excepciones y cerramos el flujo
+            throw new RuntimeException(e);
+        } finally{
+            printWriter.close();
+        }
+
     }
 }
