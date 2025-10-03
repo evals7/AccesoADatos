@@ -53,9 +53,19 @@ public class Operaciones {
         }
     }
 
-    public void mostrarFicherosRecurrentes(){
+    public void mostrarFicherosRecurrentes(File file){
         //mostrar todos los archivos de una ruta y hacerlo de forma recursiva
+        if (file.isDirectory()){
+            System.out.println("el nombre de la carpeta es: " + file.getName());
+            for (File item : file.listFiles()){
+                mostrarFicherosRecurrentes(item);
+            }
+        }else{
+            System.out.println("el nombre del archivo es: " + file.getName());
+        }
     }
+
+
 
     //METODO VOID PARA ESCRIBIR EN UN FICHERO
     public void escribirFichero(String path){
