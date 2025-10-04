@@ -147,4 +147,29 @@ public class Operaciones {
         }
 
     }
+
+    //METODO DE LECTURA con FileReader
+    public void lecturaFicheros(String path){
+        File file = new File(path);                             //1. instanciamos file y fileReader(a null)
+        FileReader fileReader = null;
+
+        try {
+            fileReader = new FileReader(file);                  //2. declaramos fileReader y le pasamos file. Capturamos la excepción
+            //fileReader.read();                                //4. aprovechamos para leer. Si queremos leer el archivo completo, tenemos que continuar la lectura hasta -1
+            int lectorCodigo = 0;                               //5. para ello, tenemos que declarar una variable nueva = 0
+            while ((lectorCodigo = fileReader.read()) != -1){   //6. mientras que ese número sea diferente de +1, sigue leyendo
+                System.out.println(lectorCodigo);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        } finally {                                             //3. aprovechamos para cerrar el flujo y capturar la excepción del fileReader.close()
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

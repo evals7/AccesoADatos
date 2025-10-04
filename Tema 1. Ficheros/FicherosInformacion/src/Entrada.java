@@ -9,6 +9,7 @@ public class Entrada {
         //operaciones.mostrarFicherosRecurrentes(new File("C:\\Users\\Eva\\OneDrive\\DAM\\2ºDAM\\06 Acceso a datos\\AccesoADatos\\Tema 1. Ficheros\\FicherosInformacion"));
         //operaciones.escribirFichero("src/resources/escritura.txt");
         //operaciones.escrituraSuperior("src/resources/escritura_superior.txt");
-        operaciones.exportarUsuario("src/resources/usuarios.csv");
+        //operaciones.exportarUsuario("src/resources/usuarios.csv");
+        operaciones.lecturaFicheros("src/resources/escritura.txt");
     }
 }
