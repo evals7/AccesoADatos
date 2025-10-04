@@ -134,7 +134,7 @@ public class Operaciones {
         FileWriter fileWriter = null;
 
         try {
-            fileWriter = new FileWriter(file);                          //4. inicializamos fileWriter y printWriter
+            fileWriter = new FileWriter(file,true);                          //4. inicializamos fileWriter y printWriter (el true es para garantizar que se anexarán los usuarios
             printWriter = new PrintWriter(fileWriter);
             printWriter.println("id, nombre, apellido, dni, correo");   //6. imprimimos la primera fila y recorremos la lista de usuarios con el for
             for (Usuario usuario: listaUsuario){                        //2. for each para recorrer el array Lista de usuario con cada usuario de tipo Usuario (esto es solo para ver en consola

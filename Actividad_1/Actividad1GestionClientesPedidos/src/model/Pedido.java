@@ -1,6 +1,8 @@
 package model;
 
-public class Pedido{
+import java.io.Serializable;
+
+public class Pedido implements Serializable {
 
     private int id, clienteId;
     private String producto, cantidad;
@@ -8,9 +10,10 @@ public class Pedido{
     public Pedido() {
     }
 
-    public Pedido(int id, int clienteId, String producto, String cantidad) {
+    //para clienteId, pasamos el Cliente para obtener la información del cliente, concretamente el id
+    public Pedido(int id, Cliente cliente, String producto, String cantidad) {
         this.id = id;
-        this.clienteId = clienteId;
+        this.clienteId = cliente.getId();
         this.producto = producto;
         this.cantidad = cantidad;
     }
