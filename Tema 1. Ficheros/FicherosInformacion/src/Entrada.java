@@ -10,6 +10,8 @@ public class Entrada {
         //operaciones.escribirFichero("src/resources/escritura.txt");
         //operaciones.escrituraSuperior("src/resources/escritura_superior.txt");
         //operaciones.exportarUsuario("src/resources/usuarios.csv");
-        operaciones.lecturaFicheros("src/resources/escritura.txt");
+        //operaciones.lecturaFicheros("src/resources/escritura.txt");
+        //operaciones.escribirObjeto("src/resources/usuario.dat");
+        operaciones.leerObjeto("src/resources/usuario.dat");
     }
 }

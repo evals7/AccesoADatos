@@ -2,6 +2,7 @@ import model.Usuario;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Operaciones {
 
@@ -157,7 +158,7 @@ public class Operaciones {
             fileReader = new FileReader(file);                  //2. declaramos fileReader y le pasamos file. Capturamos la excepción
             //fileReader.read();                                //4. aprovechamos para leer. Si queremos leer el archivo completo, tenemos que continuar la lectura hasta -1
             int lectorCodigo = 0;                               //5. para ello, tenemos que declarar una variable nueva = 0
-            while ((lectorCodigo = fileReader.read()) != -1){   //6. mientras que ese número sea diferente de +1, sigue leyendo
+            while ((lectorCodigo = fileReader.read()) != -1){   //6. mientras que ese número sea diferente de -1, sigue leyendo
                 System.out.println(lectorCodigo);
             }
         } catch (FileNotFoundException e) {
@@ -171,5 +172,69 @@ public class Operaciones {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    //METODO DE ESCRITURA DE OBJETOS OUTPUTSTREAM
+    public void escribirObjeto(String path){
+
+        Scanner sc = new Scanner(System.in);                        //5.1. Instanciamos e inicializamos sc de Scanner
+        File file = new File(path);                                 //1. Instanciamos el objeto de File (evitamos el paso de averiguar si exsite, vamos a imaginar que si
+        FileOutputStream fos = null;                                //2. instanciamos el FileOutputStream a null
+        ObjectOutputStream oos = null;                              //3. Instanciamos el ObjectOutputStream a null
+
+        try {
+            fos = new FileOutputStream(file);                               //4. inicializamos FileOutputStream y capturamos la excepción (fileNotFoundException)
+            try {
+                oos = new ObjectOutputStream(fos);                          //6. inicializamos ObjectOutputStream para arrancar el modo salida de objeto y capturamos la excepción
+                oos.writeObject(new Usuario(5, "Juan", "Gómez", "000Z", "juan@gmail.com")); //7. ahora podemos escribir un nuevo objeto, boolean, int, long, lo que queramos.
+            } catch (IOException e) {
+                System.out.println("no tienes permisos de escritura");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("El fichero no existe, quiéres crearlo?");   //5. vamos a dar la opción de crearlo, en caso de que no exista.
+            boolean crear = sc.nextBoolean();                               //5.2. crear? true o false
+            if (crear){                                                     //5.3. si lo creamos, crearNewFile
+                try {
+                    file.createNewFile();                                   //5.4. capturar la excepción
+                } catch (IOException ex) {
+                    System.out.println("no tienes permisos para crear ficheros");
+                }
+            }
+        } finally {                                                     //7. cerramos el flujo con finally{oos.close()}
+            try {
+                oos.close();
+            } catch (IOException e) {
+                System.out.println("error en el cerrado del fichero");
+            }
+        }
+    }
+
+    //METODO LECTURA DE OBJETOS (el flujo es exactamente igual, pero recuperamos en modo Object y hay que castearlos
+    public void leerObjeto(String path){
+        File file = new File(path);
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+
+        try {
+            fis = new FileInputStream(file);
+            ois = new ObjectInputStream(fis);
+            Usuario usuario = (Usuario) ois.readObject();
+            System.out.println(usuario.getNombre());
+            System.out.println(usuario.getCorreo());
+
+        } catch (FileNotFoundException | ClassCastException e) {
+            System.out.println("Error, el fichero no se encuentra");
+        } catch (IOException e) {
+            System.out.println("No tienes permiso de lectura");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error en la clase de lectura");
+        } finally {
+            try {
+                ois.close();
+            } catch (IOException |NullPointerException e) {
+                System.out.println("Error en el cerrado");
+            }
+        }
+
     }
 }
