@@ -237,4 +237,46 @@ public class Operaciones {
         }
 
     }
+
+    //METODO PARA IMPORTAR OBJETOS DESDE UN .CSV
+    public void importarCSV(String path){
+        File file = new File(path);                             //1. Instanciamos el file
+        BufferedReader br = null;                               //2. al ser un csv, sabemos que se trata de un flujo de datos en texto plano (FileReader está creado dentro del bufferedReader
+        ArrayList<Usuario> listado = new ArrayList<>();         //11. queremos meter el conjunto de usuarios en un arrayList
+
+        try {
+            br = new BufferedReader(new FileReader(file));      //3. instanciamos objeto de bufferedReader que tiene FileReader que tiene file. Capturamos excepción
+            String linea = br.readLine();                       //5. Empezamos a leer. Sabemos que la primera es una cabecera. capturamos el catch
+            //System.out.println(linea);                        //6. La primera linea no nos suele interesar, asíq ue la quitamos
+            while ((linea = br.readLine()) != null){            //7. mientras br. no sea nulo, lee la línea
+                System.out.println("linea completada");
+                String[] datos = linea.split(",");              //9. Como es un conjunto de cosas, sacaremos un array de String = que lo separe por comas
+                Usuario usuario = new Usuario(Integer.parseInt(     //8. queremos sacar los usuarios del csv. para ello, instanciamos un objeto de usuario y (10.) pasamos el array parseandolo a Int
+                        datos[0]),
+                        datos[1],
+                        datos[2],
+                        datos[3],
+                        datos[4]);
+                listado.add(usuario);                           //12. lo añadimos al arrayList listado. El metodo no mostrara nada, pero si luego creamos otro metodo mostrarUsuarios(ArrayList<Usuario> lista) y recorremos la lista, nos mostrará todos los usuarios
+            }
+            mostrarUsuarios(listado);                           //14. pasamos el listado por el metodo mostrarUsuarios()
+        } catch (FileNotFoundException e) {
+            System.out.println("Fichero no encontrado");
+        } catch (IOException e) {
+            System.out.println("Error en la lectura del fichero");
+        } finally {                                             //4. cerramos el flujo y capturamos la excepción. Además, añadimos una nullPointerException
+            try {
+                br.close();
+            } catch (IOException | NullPointerException e) {
+                System.out.println("Error en el cerrado");
+            }
+        }
+
+    }
+    //METODO PRIVADO PARA MOSTRAR LOS USUARIOS DEL ARRAYlIST CREADO EN importarCsv()
+    private void mostrarUsuarios(ArrayList<Usuario> lista){        //13. aquí creamos el metodo privado que recorrar el ArrayList e imprima el usuario
+        for (Usuario usuario: lista){
+            System.out.println(usuario);
+        }
+    }
 }
