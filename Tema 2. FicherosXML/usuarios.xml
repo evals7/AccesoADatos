@@ -1,25 +1,43 @@
 <!--Esto es un comentario en xml-->
 <!--Un fichero XML está formado por nodos-->
 
-<usuarios>              <!--nodo root, solo podemos tener 1 nodo, y dentro de él, lo que queramos-->
+<usuarios referencia= "1=">              <!--nodo root, solo podemos tener 1 nodo, y dentro de él, lo que queramos-->
                         <!--todo lo que ponga aquí será parte de los usuarios-->
                         <!--un nodo puede tener atributos y contenido-->
-    <usuario nacionalidad="española">    <!--a los nodos interiores no podemos llamarles como el root-->
+    <usuario nacionalidad="española" edad="32">    <!--a los nodos interiores no podemos llamarles como el root-->
         <nombre>
             Eva                          <!--un nodo puede tener valor-->
         </nombre>
+        <apellido>
+            Lopez
+        </apellido>
+        <dni>
+            7894F
+        </dni>
     </usuario>
-    <usuario nacionalidad="española">    <!--los atributos de los nodos se ponen al lado del nombre del nodo-->
+    <usuario nacionalidad="española" edad="20">    <!--los atributos de los nodos se ponen al lado del nombre del nodo-->
         <nombre>
             Marian
         </nombre>
+        <apellido>
+            Gómez        
+        </apellido>
+        <dni>
+            5678B
+        </dni>
     </usuario>
-    <usuario nacionalidad="francesa"> 
+    <usuario nacionalidad="francesa" edad="41"> <!--si añadimos los atributos, nos permite filtrar--> 
         <nombre>
             Juana
         </nombre>
+        <apellido>
+            Loca
+        </apellido>
+        <dni>
+            12345A
+        </dni>
     </usuario>
-        <usuario nacionalidad="alemana"> 
+        <usuario nacionalidad="alemana" edad=-"50"> 
         <nombre>
             Daths
         </nombre>
@@ -27,6 +45,9 @@
             Miller
         </apellido>
         <edad numero="12">  <!--autocerrado. No hay etiqueta de cerrado porque el contenido no tiene valor, solo un atributo que no se modifica-->
+        <dni>
+            9876C
+        </dni>
     </usuario>
 </usuarios>
 
