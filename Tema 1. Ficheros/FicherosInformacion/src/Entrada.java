@@ -13,6 +13,6 @@ public class Entrada {
         //operaciones.lecturaFicheros("src/resources/escritura.txt");
         //operaciones.escribirObjeto("src/resources/usuario.dat");
         //operaciones.leerObjeto("src/resources/usuario.dat");
-        operaciones.importarCSV("FicherosInformacion/src/resources/usuarios.csv");
+        //operaciones.importarCSV("FicherosInformacion/src/resources/usuarios.csv");
     }
 }

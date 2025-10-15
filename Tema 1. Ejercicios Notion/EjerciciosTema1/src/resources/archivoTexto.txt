@@ -1,0 +1,3 @@
+texto para leer
+linea 2 para leer. Prueba escritura. Prueba lectura.
+linea 3 para leer
