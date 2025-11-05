@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cartelera id="1">
+    <pelicula anio="2010" genero="Ciencia ficción / Acción">
+        <titulo>Christopher Nolan</titulo>
+        <director/>
+        <actores>
+            <actor>Leonardo DiCaprio</actor>
+            <actor>Joseph Gordon-Levitt</actor>
+            <actor>Elliot Page</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="2008" genero="Acción / Crimen / Drama">
+        <titulo>Christopher Nolan</titulo>
+        <director/>
+        <actores>
+            <actor>Christian Bale</actor>
+            <actor>Heath Ledger</actor>
+            <actor>Gary Oldman</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="1994" genero="Drama / Romance">
+        <titulo>Robert Zemeckis</titulo>
+        <director/>
+        <actores>
+            <actor>Tom Hanks</actor>
+            <actor>Robin Wright</actor>
+            <actor>Gary Sinise</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="1994" genero="Drama">
+        <titulo>Frank Darabont</titulo>
+        <director/>
+        <actores>
+            <actor>Tim Robbins</actor>
+            <actor>Morgan Freeman</actor>
+            <actor>Bob Gunton</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="1972" genero="Crimen / Drama">
+        <titulo>Francis Ford Coppola</titulo>
+        <director/>
+        <actores>
+            <actor>Marlon Brando</actor>
+            <actor>Al Pacino</actor>
+            <actor>James Caan</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="2000" genero="Acción / Aventura / Drama">
+        <titulo>Ridley Scott</titulo>
+        <director/>
+        <actores>
+            <actor>Russell Crowe</actor>
+            <actor>Joaquin Phoenix</actor>
+            <actor>Connie Nielsen</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="2014" genero="Ciencia ficción / Drama">
+        <titulo>Christopher Nolan</titulo>
+        <director/>
+        <actores>
+            <actor>Matthew McConaughey</actor>
+            <actor>Anne Hathaway</actor>
+            <actor>Jessica Chastain</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="1994" genero="Crimen / Drama">
+        <titulo>Quentin Tarantino</titulo>
+        <director/>
+        <actores>
+            <actor>John Travolta</actor>
+            <actor>Samuel L. Jackson</actor>
+            <actor>Uma Thurman</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="1999" genero="Ciencia ficción / Acción">
+        <titulo>Lana Wachowski, Lilly Wachowski</titulo>
+        <director/>
+        <actores>
+            <actor>Keanu Reeves</actor>
+            <actor>Carrie-Anne Moss</actor>
+            <actor>Laurence Fishburne</actor>
+        </actores>
+    </pelicula>
+    <pelicula anio="2019" genero="Drama / Thriller">
+        <titulo>Bong Joon-ho</titulo>
+        <director/>
+        <actores>
+            <actor>Song Kang-ho</actor>
+            <actor>Cho Yeo-jeong</actor>
+            <actor>Choi Woo-shik</actor>
+        </actores>
+    </pelicula>
+</cartelera>

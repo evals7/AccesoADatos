@@ -1,0 +1,55 @@
+<!--Esto es un comentario en xml-->
+<!--Un fichero XML está formado por nodos-->
+
+<usuarios referencia= "1=">              <!--nodo root, solo podemos tener 1 nodo, y dentro de él, lo que queramos-->
+                        <!--todo lo que ponga aquí será parte de los usuarios-->
+                        <!--un nodo puede tener atributos y contenido-->
+    <usuario nacionalidad="española" edad="32">    <!--a los nodos interiores no podemos llamarles como el root-->
+        <nombre>
+            Eva                          <!--un nodo puede tener valor-->
+        </nombre>
+        <apellido>
+            Lopez
+        </apellido>
+        <dni>
+            7894F
+        </dni>
+    </usuario>
+    <usuario nacionalidad="española" edad="20">    <!--los atributos de los nodos se ponen al lado del nombre del nodo-->
+        <nombre>
+            Marian
+        </nombre>
+        <apellido>
+            Gómez        
+        </apellido>
+        <dni>
+            5678B
+        </dni>
+    </usuario>
+    <usuario nacionalidad="francesa" edad="41"> <!--si añadimos los atributos, nos permite filtrar--> 
+        <nombre>
+            Juana
+        </nombre>
+        <apellido>
+            Loca
+        </apellido>
+        <dni>
+            12345A
+        </dni>
+    </usuario>
+    <usuario nacionalidad="alemana" edad="50">
+        <nombre>
+            Daths
+        </nombre>
+        <apellido>
+            Miller
+        </apellido>
+        <dni>
+            9876C
+        </dni>
+    </usuario>
+</usuarios>
+
+<!--XPATH Lenguaje de consultas para XML-->
+
+<!--Dame todos los usuarios de la / (raiz) cuya nacionalidad sea española-->
