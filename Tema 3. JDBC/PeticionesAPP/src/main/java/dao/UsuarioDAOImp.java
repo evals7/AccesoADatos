@@ -18,7 +18,7 @@ public class UsuarioDAOImp implements InterfazDAO<Usuario> { //1. Implementamos 
     private ResultSet resultSet;
 
     @Override
-    public boolean insertarDato(Usuario data) throws SQLException {         //4. Metodo Crear
+    public boolean insertarDato(Usuario data) throws SQLException {         //4. Metodo Crear //trataremos la SQL Exception
         String query = String.format("INSERT INTO %s (%s,%s,%s,%s) VALUES (?,?,?,?)",
                 SchemeDB.TAB_NAME,
                 SchemeDB.COL_NAME, SchemeDB.COL_MAIL, SchemeDB.COL_PHONE, SchemeDB.COL_PROFILE);        //4.1. creamos la query SQL para insertar los datos (todos menos el ID)
@@ -46,8 +46,7 @@ public class UsuarioDAOImp implements InterfazDAO<Usuario> { //1. Implementamos 
                 String mail = resultSet.getString(SchemeDB.COL_MAIL);
                 int telefono = resultSet.getInt(SchemeDB.COL_PHONE);
                 int idPerfil = resultSet.getInt(SchemeDB.COL_PROFILE);
-                Usuario usuario = new Usuario(nombre, mail, telefono, idPerfil);                        //5.4 creamos un usuario nuevo y le pasamos todos los atributos añadidos
-                listaUsuarios.add(usuario);                                                             //5.5 añadimos el usuario a la lista
+                listaUsuarios.add(new Usuario(nombre, mail, telefono, idPerfil));                        //5.4 creamos un usuario nuevo y le pasamos todos los atributos añadidos, añadimos el usuario a la lista
             }
             return listaUsuarios;                                                                       //5.6 al salir del bucle devolvemos la lista de usuarios
 
@@ -66,6 +65,19 @@ public class UsuarioDAOImp implements InterfazDAO<Usuario> { //1. Implementamos 
     public void actualizarDato(Usuario dataNuevo) {
 
     } //al darle un tipo al interfazDao, implementará los métodos con el mismo título
+
+    @Override
+    public int borrarDatos(int id) {
+        String query = String.format("DELETE FROM %s WHERE %s=?", SchemeDB.TAB_NAME, SchemeDB.COL_ID);
+        try {                                                               //aquí si tratamos la excepción porque es un error de sintaxis
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,id);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error de sintaxis en la ejecución de la query");
+        }
+    return -1; //porque el 0 lodevuelve el execute update
+    }
 
 
 }   //la lógica contra la bbdd

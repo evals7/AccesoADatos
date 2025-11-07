@@ -19,4 +19,12 @@ public class Usuario {          //MODEL: modelado de la clase que simula la enti
         this.telefono = telefono;
         this.idPerfil = idPerfil;
     }
+
+    public void mostrarDatos(){
+        System.out.println("id = " + id);
+        System.out.println("nombre = " + nombre);
+        System.out.println("mail = " + mail);
+        System.out.println("telefono = " + telefono);
+        System.out.println("idPerfil = " + idPerfil);
+    }
 }

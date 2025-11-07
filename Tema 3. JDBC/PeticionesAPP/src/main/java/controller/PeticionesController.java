@@ -26,7 +26,8 @@ public class PeticionesController {   // capa de lógica del negocio, pero no co
                 System.out.println("Usuario agregado correctamente");
             } catch (SQLException e) {
                 Scanner scanner = new Scanner(System.in);                    //3.3 Para ello necesitamos instanciar un objeto de Scanner y leer el nuevo correo
-                System.out.println("El correo ya está en la BD");
+                System.out.println("Error: El correo ya está en la BD");
+                System.out.println(e.getMessage());
                 System.out.println("Introduce el nuevo correo electrónico"); //3.2 queremos dar la opción de que, en caso de que haya error, se pueda pedir el mail otra vez
                 String correo = scanner.next();                     //3.4 leemos el nuevo correo
                 usuario.setMail(correo);                            //3.5 Insertamos el correo
@@ -39,4 +40,25 @@ public class PeticionesController {   // capa de lógica del negocio, pero no co
 
 
     }
+
+    public void borrarUsuario(int id){
+         int rows = usuarioDAOImp.borrarDatos(id);
+
+        if (rows>1){
+             System.out.println("Usuarios borrados correctamente");
+         }else if (rows==0){
+             System.out.println("No se ha encontrado usuario con ese ID");
+         }else if (rows==1){
+            System.out.println("Usuario borrado correctamente");
+         } else{
+            System.out.println("Fallo en el proceso");
+         }
+    }
+
+    public void listarUsuarios(){
+        for(Usuario item : usuarioDAOImp.obtenerLista()){
+            item.mostrarDatos();
+        }
+    }
+
 }

@@ -16,4 +16,6 @@ public interface InterfazDAO<T> {   //DAO: definimos todos los métodos que el u
 
     void actualizarDato(T dataNuevo);
 
+    int borrarDatos(int id);
+
 }
