@@ -33,7 +33,7 @@ public class OperacionesXML {
             NodeList nodosUsuario = document.getElementsByTagName("usuario");                   //5.1 nodeList con todos los elementos que contienen usuario
             System.out.println(nodosUsuario.getLength());                                       //6. TEST: syso para obtener la longitud de usuarios desde una app que se llame xml
             for (int i = 0; i < nodosUsuario.getLength(); i++) {                                //7. Recorremos el array con el for hasta el getLength()
-                Element nodo = (Element) nodosUsuario.item(i);                                  //8. casteamos el i a "nodo"
+                Element nodo = (Element) nodosUsuario.item(i);                                  //8. casteamos el i a "nodo", parte de Element.
                 String nacionalidad = nodo.getAttribute("nacionalidad");                  //9. nodo nos permite sacar datos como atributos, nombres, hijos, etc.
                 System.out.println("La nacionalidad es: "+ nacionalidad);
                 int edad = Integer.parseInt(nodo.getAttribute("edad"));                   //10. atributo edad. que hay que parsearlo de string a int
