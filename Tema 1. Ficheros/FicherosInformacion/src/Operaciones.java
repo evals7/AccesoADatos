@@ -105,8 +105,10 @@ public class Operaciones {
         try {
             fileWriter = new FileWriter (file); //5. dentro del trycatch, declaramos el file y el printwriter. Esto se podría hacer en una sola línea-> printWriter = new PrintWriter (fileWriter = new FileWriter (file));
             printWriter = new PrintWriter (fileWriter);
+            //printWriter = new PrintWriter(new FileWriter(file));
             printWriter.println("Esto es un ejemplo con printWriter");  //7. ahora podemos escribir con saltos de línea, println
             printWriter.println("Esto es una nueva línea");
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);

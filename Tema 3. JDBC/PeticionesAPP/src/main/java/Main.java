@@ -59,6 +59,5 @@ public class Main {
             System.out.println("Error en la sentencia query");
         }
 
-
     }
 }

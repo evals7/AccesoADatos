@@ -1,11 +1,13 @@
 package dao;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import database.DBConnection;
 import database.SchemeDB;
 import model.Usuario;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuarioDAOImp implements InterfazDAO<Usuario> { //1. Implementamos la interfaz y sus métodos

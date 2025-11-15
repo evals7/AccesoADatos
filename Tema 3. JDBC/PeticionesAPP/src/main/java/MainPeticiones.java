@@ -50,7 +50,6 @@ public class MainPeticiones {
             case 4->{
                 System.out.println("Exportación a XML");
                 peticionesController.exportacionXML();
-
             }
             case 5->{
                 System.out.println("Exportamos usuarios a un JSON");
@@ -59,13 +58,10 @@ public class MainPeticiones {
             case 6->{
                 System.out.println("Importar usuarios de un JSON");
                 peticionesController.importarJSON();
-
-
             }
             case 7->{
                 System.out.println("Importar usuarios de un XML");
                 peticionesController.importacionXML();
-
             }
         }
 
