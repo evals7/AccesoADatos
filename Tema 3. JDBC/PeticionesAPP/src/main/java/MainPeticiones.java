@@ -53,7 +53,8 @@ public class MainPeticiones {
 
             }
             case 5->{
-
+                System.out.println("Exportamos usuarios a un JSON");
+                peticionesController.exportarJSON();
             }
             case 6->{
                 System.out.println("Importar usuarios de un JSON");
@@ -69,5 +70,6 @@ public class MainPeticiones {
         }
 
         } while (opcion!=8);
+
     }
 }

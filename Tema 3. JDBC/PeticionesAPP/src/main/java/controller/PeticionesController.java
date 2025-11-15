@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -141,9 +142,29 @@ public class PeticionesController {   // capa de lógica del negocio, pero no co
     //Metodo para exportar a un JSON desde la bbdd
     public void exportarJSON(){
         ObjectMapper mapper = new ObjectMapper(); //1.. instanciamos el mapper dle objectMapper
-        ObjectWriter response = mapper.writerFor(UsuarioResponse.class); //declaramos un objeto response de objectWriter
+        ObjectWriter response = mapper.writerFor(UsuarioResponse.class); //2. declaramos un objeto response de objectWriter
+        ArrayList<Usuario> lista = usuarioDAOImp.obtenerLista();  //3.1 si queremos sacar un solo usuario, tenemos que obtener toda la lista y coger solo el primer objeto
+
+        /*
+        Usuario usuario = lista.getFirst();         //3.2 creamos un objeto de usuario
+
+        File file = new File("src/main/java/controller/usuarios.json");  //3.3 creamos un nuevo file y le pasamos la ruta
+        PrintWriter pw = null;                      //3.4 lanzamos el printWriter y le pasamos el file. Capturamos la excepción
+
+
         try {
-            response.createGenerator(new File("src/main/java/controller/usuarios.json"), JsonEncoding.UTF8);
+            pw = new PrintWriter(new FileWriter(file)); //3.4
+            pw.println(usuario);                        //3.5 pedimos imprimir el usuario 1º de la lista
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            pw.close();                                 //3.6 acordarse de cerrar el proceso
+        }
+        */
+
+        try {
+            response.createGenerator(new File("src/main/java/controller/usuarios.json"), JsonEncoding.UTF8); //2. aplicamos createGererator a response y le pasamos el nuevo archivo donde vamos a exportar
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
