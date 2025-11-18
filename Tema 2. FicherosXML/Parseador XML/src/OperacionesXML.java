@@ -202,7 +202,5 @@ public class OperacionesXML {
         } catch (ParserConfigurationException |TransformerException e) {
             System.out.println("Error en el parseo del documento");
         }
-
-
     }
 }
