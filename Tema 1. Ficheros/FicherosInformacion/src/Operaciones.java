@@ -35,6 +35,7 @@ public class Operaciones {
 
 
     }
+
     //METODO VOID PARA SACAR INFORMACIÓN DE UN DIRECTORIO O CARPETA
     public void informacionDirectorio(String path){
         File directorio = new File(path);
@@ -55,8 +56,8 @@ public class Operaciones {
         }
     }
 
+    //METODO VOID PARA MOSTRAR TODOS LOS ARCHIVOS DE UNA RUTA DE FORMA RECURSIVA
     public void mostrarFicherosRecurrentes(File file){
-        //mostrar todos los archivos de una ruta y hacerlo de forma recursiva
         if (file.isDirectory()){
             System.out.println("el nombre de la carpeta es: " + file.getName());
             for (File item : file.listFiles()){
@@ -66,8 +67,6 @@ public class Operaciones {
             System.out.println("el nombre del archivo es: " + file.getName());
         }
     }
-
-
 
     //METODO VOID PARA ESCRIBIR EN UN FICHERO CON FILEWRITER
     public void escribirFichero(String path){
@@ -95,6 +94,7 @@ public class Operaciones {
             }
         }
     }
+
     //METODO ESCRITURA USANDO EL PRINTWRITER/BUFFEREDREADER
     public void escrituraSuperior(String path){
         File file = new File(path);             //1. instanciamos el File
@@ -121,8 +121,7 @@ public class Operaciones {
         }
     }
 
-    //METODO DE ESCRITURA PRINTWRITER PARA EXPORTAR USUARIOS DE UNA CLASE
-                                                                        //hemos creado la Clase Usuario con sus variables privadas y el metodo toString modificado (ver metodo)
+    //METODO DE ESCRITURA PRINTWRITER PARA EXPORTAR USUARIOS DE UNA CLASE  //hemos creado la Clase Usuario con sus variables privadas y el metodo toString modificado (ver metodo)
     public void exportarUsuario(String path){
         ArrayList<Usuario> listaUsuario = new ArrayList<>();            //1.creamos  un ArrayList de nombre listaUsuario y añadimos usuarios
         listaUsuario.add(new Usuario(1, "Eva", "López", "7894A", "eva@gmail.com"));
@@ -275,6 +274,7 @@ public class Operaciones {
         }
 
     }
+
     //METODO PRIVADO PARA MOSTRAR LOS USUARIOS DEL ARRAYlIST CREADO EN importarCsv()
     private void mostrarUsuarios(ArrayList<Usuario> lista){        //13. aquí creamos el metodo privado que recorrar el ArrayList e imprima el usuario
         for (Usuario usuario: lista){
