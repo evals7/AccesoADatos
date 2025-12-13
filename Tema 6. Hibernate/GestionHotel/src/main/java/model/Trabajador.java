@@ -28,8 +28,8 @@ public class Trabajador implements Serializable { //lo implementamos por defecto
     private int salario;
     @Embedded
     private Direccion direccion;
-    @Transient
-    private String comentarios; //podemos crear atributos que no estén en la bbdd
+    @Transient                  //La etiqueta transient hace que estos atributos no se persistan en la base de datos
+    private String comentarios;
     @Transient
     private boolean disponibilidad;
 

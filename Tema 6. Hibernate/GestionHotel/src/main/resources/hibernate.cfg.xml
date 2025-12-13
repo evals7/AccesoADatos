@@ -5,6 +5,11 @@
         <property name ="hibernate.connection.username">root</property>         <!--el nombre de usuario-->
         <property name ="hibernate.connection.password">root</property>             <!--la password-->
         <property name ="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>  <!--el lenguaje con el que vamos a hablar con la bbdd-->
+        <property name="hibernate.hbm2ddl.auto">update</property> <!--Esta property controla como Hibernate gestiona el esquema de la bd. Create hace que, cada vez que se inicia hibernate, se eliminan las tablas existenes y las crea de 0 con anotaciones y mapeos-->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> <!-Nos permite actualizar la bbdd-->
+
+
+        <property name="show_sql">True</property>                               <!--permite que Hibernate muestre en la consola todas las sentencias SQL que genera y ejecuta internamente.-->
 
         <mapping class="model.Trabajador"/>
 
