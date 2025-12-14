@@ -13,4 +13,8 @@ public interface SchemaDB {
     String PROF_TAB_NAME = "profesores";
     String PROF_COL_ID = "id";
     String PROF_COL_NAME = "nombre";
+
+    String CURSOEST_TAB_NAME = "cursos_estudiantes";
+    String CURSOEST_COL_ID_CURSO = "id_curso";
+    String CURSOEST_COL_ID_ESTUDIANTE = "id_estudiantes";
 }

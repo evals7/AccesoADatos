@@ -20,4 +20,8 @@ public class Profesor {
         this.nombre = nombre;
     }
 
+    public Profesor(String nombre) {
+        this.nombre = nombre;
+    }
+
 }

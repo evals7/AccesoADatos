@@ -21,4 +21,13 @@ public class Curso {
         this.nombre = nombre;
         this.profesor = profesor;
     }
+
+    public Curso(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+    public Curso(String nombre) {
+        this.nombre = nombre;
+    }
+
 }

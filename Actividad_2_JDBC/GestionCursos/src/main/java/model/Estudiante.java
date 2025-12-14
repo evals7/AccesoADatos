@@ -18,4 +18,7 @@ public class Estudiante {
         this.id = id;
         this.nombre = nombre;
     }
+    public Estudiante(String nombre) {
+        this.nombre = nombre;
+    }
 }

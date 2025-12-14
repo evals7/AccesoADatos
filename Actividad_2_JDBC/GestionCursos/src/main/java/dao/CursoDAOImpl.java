@@ -6,10 +6,7 @@ import model.Curso;
 import model.Estudiante;
 import model.Profesor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CursoDAOImpl implements InterfazDAO<Curso> {
@@ -30,10 +27,14 @@ public class CursoDAOImpl implements InterfazDAO<Curso> {
                 SchemaDB.CURSO_COL_NAME, SchemaDB.CURSO_COL_IDPROF);
 
         try {
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, data.getNombre());
             preparedStatement.setInt(2, data.getProfesor().getId());
             preparedStatement.execute();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                data.setId(rs.getInt(1));
+            }
             return true;
         } catch (SQLException e) {
             System.out.println("Error de inserción" + e.getMessage());
@@ -46,12 +47,16 @@ public class CursoDAOImpl implements InterfazDAO<Curso> {
     public ArrayList<Curso> obtenerLista() {
         ArrayList<Curso> listaCursos = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement("select * from "+SchemaDB.CURSO_TAB_NAME+" inner join "+SchemaDB.PROF_TAB_NAME+" p on id_profesor = p.id");
+            preparedStatement = connection.prepareStatement("select * from cursos inner join profesores p on id_profesor = p.id");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                int id = resultSet.getInt(SchemaDB.CURSO_TAB_NAME+"."+SchemaDB.CURSO_COL_ID);
-                String nombre = resultSet.getString(SchemaDB.CURSO_TAB_NAME+"."+SchemaDB.CURSO_COL_NAME);
-                Profesor profesor = new Profesor(resultSet.getInt("p."+SchemaDB.PROF_COL_ID), resultSet.getString("p."+SchemaDB.PROF_COL_NAME));
+                int id = resultSet.getInt("id");
+                String nombre = resultSet.getString("nombre");
+                int idProfesor = resultSet.getInt("p.id");
+                String nombreProfesor =  resultSet.getString("p.nombre");
+                Profesor profesor = new Profesor(idProfesor, nombreProfesor); //profesores de la clase Profesor
+                //El Listado de estudiantes no es relevante para obtener el listado de cursos, por eso no lo añado.
+                // Para saber los estudiantes de cada curso, usar el metodo obtenerListaEstudiantes()
                 listaCursos.add(new Curso(id, nombre, profesor));
             }
         } catch (SQLException e) {
@@ -60,10 +65,28 @@ public class CursoDAOImpl implements InterfazDAO<Curso> {
         return listaCursos;
     }
 
+    public ArrayList<Curso> obtenerListaCursos(Profesor profesor) {
+        ArrayList<Curso> listaCursosProfesor = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM cursos WHERE id_profesor=?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, profesor.getId());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("nombre");
+                listaCursosProfesor.add(new Curso(id, name, profesor));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaCursosProfesor;
+    }
+
     //UPDATE
     @Override
     public void actualizarDato(Curso dataNuevo) {
-        String query = String.format("UPDATE %s SET %s?, %s? WHERE %s?",
+        String query = String.format("UPDATE %s SET %s=?, %s=? WHERE %s=?",
                 SchemaDB.CURSO_TAB_NAME,
                 SchemaDB.CURSO_COL_NAME, SchemaDB.CURSO_COL_IDPROF,
                 SchemaDB.CURSO_COL_ID);
@@ -72,6 +95,7 @@ public class CursoDAOImpl implements InterfazDAO<Curso> {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, dataNuevo.getNombre());
             preparedStatement.setInt(2, dataNuevo.getProfesor().getId());
+            preparedStatement.setInt(3, dataNuevo.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -82,6 +106,14 @@ public class CursoDAOImpl implements InterfazDAO<Curso> {
     //DELETE
     @Override
     public int borrarDatos(int id) {
-        return 0;
+        String query = String.format("DELETE FROM %s WHERE %s=?", SchemaDB.CURSO_TAB_NAME, SchemaDB.CURSO_COL_ID);
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error de sintaxis");
+        }
+        return -1;
     }
 }

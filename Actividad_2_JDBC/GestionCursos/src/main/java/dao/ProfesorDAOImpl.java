@@ -2,12 +2,11 @@ package dao;
 
 import database.DBConnection;
 import database.SchemaDB;
+import model.Curso;
+import model.Estudiante;
 import model.Profesor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ProfesorDAOImpl implements InterfazDAO<Profesor> {
@@ -27,28 +26,68 @@ public class ProfesorDAOImpl implements InterfazDAO<Profesor> {
                 SchemaDB.PROF_COL_NAME);
 
         try {
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, data.getNombre());
             preparedStatement.execute();
-            return true;
+
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                data.setId(rs.getInt(1));
+                return true;
+            }
         } catch (SQLException e) {
             System.out.println("Error de inserción" + e.getMessage());
-            return false;
         }
+
+        return false;
     }
+
 
     @Override
     public ArrayList<Profesor> obtenerLista() {
-        return null;
+        ArrayList<Profesor> listaProfesores = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement("SELECT * FROM profesores");
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                int idProfesor = resultSet.getInt("id");
+                String nameProfesor = resultSet.getString("nombre");
+                listaProfesores.add(new Profesor(idProfesor, nameProfesor));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error de sintaxis");
+        }
+        return listaProfesores;
     }
 
     @Override
     public void actualizarDato(Profesor dataNuevo) {
+        String query = String.format("UPDATE %s SET %s=? WHERE %s=?",
+                SchemaDB.PROF_TAB_NAME,
+                SchemaDB.PROF_COL_NAME,
+                SchemaDB.PROF_COL_ID);
 
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, dataNuevo.getNombre());
+            preparedStatement.setInt(2, dataNuevo.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public int borrarDatos(int id) {
-        return 0;
+        String query = String.format("DELETE FROM %s WHERE %s=?", SchemaDB.PROF_TAB_NAME, SchemaDB.PROF_COL_ID);
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error de sintaxis");
+        }
+        return -1;
     }
 }
