@@ -14,7 +14,13 @@ public class MainDAO {
         /*
         trabajadorDAO.eliminarUsuario(1);
         */
+        /*
         trabajadorDAO.actualizarUsuario(4, 45000);
-
+        */
+        /*
+        trabajadorDAO.seleccionarTrabajador("borja@gmail.com");
+        */
+        trabajadorDAO.seleccionarTodos();
     }
+
 }
