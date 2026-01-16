@@ -12,6 +12,7 @@
         <property name="show_sql">True</property>                               <!--permite que Hibernate muestre en la consola todas las sentencias SQL que genera y ejecuta internamente.-->
 
         <mapping class="model.Trabajador"/>
-
+        <mapping class="model.Perfil"/>
+        <mapping class="model.Cliente"/>
     </session-factory>
 </hibernate-configuration>

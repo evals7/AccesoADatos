@@ -4,6 +4,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaUpdate;
 import jakarta.persistence.criteria.Root;
 import jdk.swing.interop.SwingInterOpUtils;
+import model.Cliente;
 import model.Trabajador;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -139,5 +140,19 @@ public class TrabajadorDAO {
         sessionFactory.close();
 
 
+    }
+
+    public void verReservasRealizadas(int id){
+        sessionFactory = new Configuration().configure().buildSessionFactory();
+        session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+        Trabajador trabajador = session.find(Trabajador.class, id);
+        for(Cliente cliente: trabajador.getClientes()){
+            System.out.println("El nombre de la reserva es: "+cliente.getNombre());
+        }
+
+        transaction.commit();
+        session.close();
+        sessionFactory.close();
     }
 }
